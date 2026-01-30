@@ -20,8 +20,7 @@ import {
   X,
   ChevronDown,
   Star,
-  Flame,
-  Activity
+  Flame
 } from 'lucide-react';
 
 const supabase = createClient(
@@ -315,8 +314,47 @@ export default function Home() {
           style={{ y: backgroundY }}
         >
           <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-blue-900/20" />
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-[120px] animate-pulse" />
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }} />
+          <motion.div 
+            className="absolute top-0 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-[120px]"
+            animate={{
+              scale: [1, 1.2, 1],
+              x: [0, 50, 0],
+              y: [0, 30, 0],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div 
+            className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px]"
+            animate={{
+              scale: [1, 1.3, 1],
+              x: [0, -50, 0],
+              y: [0, -30, 0],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div 
+            className="absolute top-1/2 left-1/2 w-72 h-72 bg-indigo-600/10 rounded-full blur-[100px]"
+            animate={{
+              scale: [1, 1.4, 1],
+              rotate: [0, 180, 360],
+              opacity: [0.2, 0.4, 0.2],
+            }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          />
         </motion.div>
 
         {/* Grid pattern overlay */}
@@ -492,11 +530,36 @@ export default function Home() {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: 0.3 }}
-                  className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600/10 to-blue-600/10 border border-purple-600/20 rounded-full px-4 py-2 mb-4"
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600/20 via-purple-500/20 to-blue-600/20 border border-purple-500/40 rounded-full px-5 py-2.5 mb-4 shadow-lg shadow-purple-600/20"
                 >
-                  <Ghost size={16} className="text-purple-400" />
-                  <span className="text-xs font-bold text-purple-300 tracking-wider uppercase">100% Anonym</span>
-                  <Sparkles size={14} className="text-purple-400" />
+                  <motion.div
+                    animate={{ 
+                      scale: [1, 1.2, 1],
+                      rotate: [0, 5, -5, 0],
+                    }}
+                    transition={{ 
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    <Ghost size={18} className="text-purple-300" />
+                  </motion.div>
+                  <span className="text-sm font-black text-purple-200 tracking-wider uppercase">100% Anonym</span>
+                  <motion.div
+                    animate={{ 
+                      rotate: [0, 15, -15, 0],
+                      scale: [1, 1.1, 1],
+                    }}
+                    transition={{ 
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 0.5,
+                    }}
+                  >
+                    <Sparkles size={16} className="text-purple-300" />
+                  </motion.div>
                 </motion.div>
 
                 <motion.h1
@@ -526,13 +589,44 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: 0.6 }}
                 className="flex items-center justify-center gap-2 mb-8"
               >
-                <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-blue-600 rounded-full flex items-center justify-center font-bold text-white text-lg">
+                <motion.div 
+                  className="w-10 h-10 bg-gradient-to-br from-purple-600 to-blue-600 rounded-full flex items-center justify-center font-bold text-white text-lg shadow-lg shadow-purple-600/30"
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
                   D
-                </div>
+                </motion.div>
                 <span className="text-xl font-bold text-white">@dein_benutzername</span>
-                <div className="w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center">
-                  <Check size={12} className="text-white" strokeWidth={3} />
-                </div>
+                <motion.div 
+                  className="relative w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center shadow-lg shadow-blue-600/50"
+                  whileHover={{ scale: 1.15 }}
+                  animate={{
+                    boxShadow: [
+                      '0 0 15px rgba(37, 99, 235, 0.5)',
+                      '0 0 25px rgba(37, 99, 235, 0.7)',
+                      '0 0 15px rgba(37, 99, 235, 0.5)',
+                    ],
+                  }}
+                  transition={{
+                    boxShadow: { duration: 2, repeat: Infinity, ease: "easeInOut" },
+                    scale: { type: "spring", stiffness: 300 },
+                  }}
+                >
+                  <Check size={14} className="text-white" strokeWidth={3.5} />
+                  {/* Glow ring */}
+                  <motion.div
+                    className="absolute inset-0 rounded-full border-2 border-blue-400"
+                    animate={{
+                      scale: [1, 1.3, 1],
+                      opacity: [0.5, 0, 0.5],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeOut",
+                    }}
+                  />
+                </motion.div>
               </motion.div>
 
               {/* Message input */}
@@ -544,28 +638,41 @@ export default function Home() {
               >
                 {/* Input container with focus effect */}
                 <div className="relative">
-                  {/* Animated border gradient on focus */}
+                  {/* Animated border gradient on focus - using framer-motion */}
                   <AnimatePresence>
                     {isFocused && (
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="absolute -inset-[2px] bg-gradient-to-r from-purple-600 via-blue-600 to-purple-600 rounded-2xl blur-sm"
-                        style={{
-                          backgroundSize: '200% 200%',
-                          animation: 'gradientShift 3s ease infinite',
-                        }}
-                      />
+                      <>
+                        {/* Primary glow */}
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.95 }}
+                          animate={{ 
+                            opacity: [0.4, 0.7, 0.4],
+                            scale: [0.95, 1, 0.95],
+                          }}
+                          exit={{ opacity: 0, scale: 0.95 }}
+                          transition={{
+                            opacity: { duration: 2, repeat: Infinity, ease: "easeInOut" },
+                            scale: { duration: 2, repeat: Infinity, ease: "easeInOut" },
+                          }}
+                          className="absolute -inset-[3px] bg-gradient-to-r from-purple-600 via-blue-600 to-purple-600 rounded-2xl blur-md"
+                        />
+                        {/* Secondary intense glow */}
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ 
+                            opacity: [0.2, 0.5, 0.2],
+                          }}
+                          exit={{ opacity: 0 }}
+                          transition={{
+                            duration: 1.5,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                          }}
+                          className="absolute -inset-[6px] bg-gradient-to-r from-purple-500 via-blue-500 to-purple-500 rounded-2xl blur-xl"
+                        />
+                      </>
                     )}
                   </AnimatePresence>
-
-                  <style jsx>{`
-                    @keyframes gradientShift {
-                      0%, 100% { background-position: 0% 50%; }
-                      50% { background-position: 100% 50%; }
-                    }
-                  `}</style>
 
                   <textarea
                     ref={textareaRef}
@@ -575,7 +682,7 @@ export default function Home() {
                     onFocus={() => setIsFocused(true)}
                     onBlur={() => setIsFocused(false)}
                     placeholder="Schreib hier deine anonyme Nachricht..."
-                    className="relative w-full h-48 bg-zinc-900/80 backdrop-blur-sm border-2 border-zinc-800/80 rounded-2xl p-5 text-white placeholder-zinc-500 focus:border-purple-600/50 outline-none transition-all duration-300 resize-none text-base font-medium"
+                    className="relative w-full h-48 bg-zinc-900/80 backdrop-blur-sm border-2 border-zinc-800/80 rounded-2xl p-5 text-white placeholder-zinc-500 focus:border-purple-600/80 focus:shadow-[0_0_30px_rgba(147,51,234,0.3)] outline-none transition-all duration-300 resize-none text-base font-medium"
                     style={{
                       fontFamily: "'Archivo', sans-serif",
                     }}
@@ -637,10 +744,20 @@ export default function Home() {
                   className={`relative w-full overflow-hidden font-bold py-5 rounded-xl text-base flex items-center justify-center gap-3 transition-all duration-300 ${
                     loading || !canSend
                       ? 'bg-zinc-800/50 cursor-not-allowed border-2 border-zinc-800/50'
-                      : 'bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 border-2 border-transparent shadow-lg shadow-purple-600/20'
+                      : 'bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 border-2 border-transparent shadow-lg shadow-purple-600/20 hover:shadow-purple-600/40'
                   }`}
-                  whileHover={canSend && !loading ? { scale: 1.01 } : {}}
+                  whileHover={canSend && !loading ? { scale: 1.01, y: -1 } : {}}
                   whileTap={canSend && !loading ? { scale: 0.99 } : {}}
+                  animate={loading ? {
+                    boxShadow: [
+                      '0 0 20px rgba(139, 92, 246, 0.3)',
+                      '0 0 40px rgba(139, 92, 246, 0.5)',
+                      '0 0 20px rgba(139, 92, 246, 0.3)',
+                    ],
+                  } : {}}
+                  transition={loading ? {
+                    boxShadow: { duration: 1.5, repeat: Infinity, ease: "easeInOut" }
+                  } : {}}
                 >
                   {/* Animated shimmer effect */}
                   {canSend && !loading && (
@@ -657,26 +774,55 @@ export default function Home() {
                     />
                   )}
 
+                  {/* Loading pulsing background */}
+                  {loading && (
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-purple-600/50 via-blue-600/50 to-purple-600/50"
+                      animate={{
+                        opacity: [0.3, 0.6, 0.3],
+                      }}
+                      transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    />
+                  )}
+
                   <span className="relative z-10 flex items-center gap-3">
                     {loading ? (
                       <>
-                        <motion.div
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-                        >
-                          <Activity size={20} />
+                        {/* Custom elegant spinner */}
+                        <motion.div className="relative w-5 h-5">
+                          <motion.div
+                            className="absolute inset-0 border-2 border-white/30 rounded-full"
+                          />
+                          <motion.div
+                            className="absolute inset-0 border-2 border-white border-t-transparent rounded-full"
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 0.8, repeat: Infinity, ease: 'linear' }}
+                          />
                         </motion.div>
-                        <span className="text-white">Wird gesendet...</span>
+                        <span className="text-white font-black tracking-wide">WIRD GESENDET</span>
                       </>
                     ) : !canSend ? (
                       <>
-                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        <span className="text-white/70">Wartezeit: {cooldownTime}s</span>
+                        <motion.div 
+                          className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                        />
+                        <span className="text-white/70 font-black tracking-wide">WARTEZEIT: {cooldownTime}s</span>
                       </>
                     ) : (
                       <>
                         <span className="text-white font-black tracking-wide">ANONYM SENDEN</span>
-                        <Send size={20} className="text-white" />
+                        <motion.div
+                          animate={{ x: [0, 3, 0] }}
+                          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                        >
+                          <Send size={20} className="text-white" />
+                        </motion.div>
                       </>
                     )}
                   </span>
