@@ -1,13 +1,45 @@
 # anonim-mesaj
 
-No description has been provided yet.
+An anonymous message web app built with Next.js (App Router), React and Supabase.
 
-## Details
+## Tech Stack
 
-- Primary language: JavaScript
-- License: not specified
-- Repository: https://github.com/Higer23/anonim-mesaj
+- Next.js 16, React 19
+- Supabase (`@supabase/supabase-js`) for data storage
+- Framer Motion for animations, Tailwind CSS for styling
 
-## Status
+## Getting Started
 
-Setup and usage instructions are not yet documented. They will be added in a future update.
+```bash
+git clone https://github.com/Higer23/anonim-mesaj.git
+cd anonim-mesaj
+npm install
+```
+
+Create a `.env.local` file with your Supabase project credentials (use your own values):
+
+```
+NEXT_PUBLIC_SUPABASE_URL=your-project-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Then open `http://localhost:3000`.
+
+## Scripts
+
+| Command         | Description                 |
+| --------------- | --------------------------- |
+| `npm run dev`   | Start the development server |
+| `npm run build` | Create a production build    |
+| `npm start`     | Run the production build     |
+| `npm run lint`  | Run ESLint                   |
+
+## License
+
+No license has been specified yet.
